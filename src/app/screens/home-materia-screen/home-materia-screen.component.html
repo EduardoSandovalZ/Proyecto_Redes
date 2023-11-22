@@ -1,0 +1,94 @@
+<section class="home-page">
+    <div class="wrapper">
+        <div class="section-home">
+            <div class="header-home">
+                <button class="btn btn-danger" (click)="regresar()">Cancelar</button>
+                <!-- <mat-icon class="icon-back" (click)="logout()">arrow_back</mat-icon> -->
+                <span class="title">Lista de materias</span>
+                
+            </div>
+            <div class="body-home">
+                <div class="mat-elevation-z8">
+                    <table mat-table [dataSource]="dataSource">
+                        <!-- NRC -->
+                        <ng-container matColumnDef="nrc">
+                            <th mat-header-cell *matHeaderCellDef> NRC </th>
+                            <td mat-cell *matCellDef="let element"> {{element.nrc}} </td>
+                        </ng-container>
+            
+                        <!-- Nombre -->
+                        <ng-container matColumnDef="nombre">
+                            <th mat-header-cell *matHeaderCellDef> Nombre </th>
+                            <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+                        </ng-container>
+            
+                        <!-- Sección -->
+                        <ng-container matColumnDef="seccion">
+                            <th mat-header-cell *matHeaderCellDef> Sección </th>
+                            <td mat-cell *matCellDef="let element"> {{element.seccion}} </td>
+                        </ng-container>
+            
+                        <!-- Días -->
+                        <ng-container matColumnDef="dias">
+                            <th mat-header-cell *matHeaderCellDef> Días </th>
+                            <td mat-cell *matCellDef="let element"> {{element.dias}} </td>
+                        </ng-container>
+            
+                        <!-- Hora de inicio -->
+                        <ng-container matColumnDef="hora_inicio">
+                            <th mat-header-cell *matHeaderCellDef> Hora de inicio </th>
+                            <td mat-cell *matCellDef="let element"> {{element.hora_inicio | date:'HH:mm'}} </td>
+                        </ng-container>
+            
+                        <!-- Hora final -->
+                        <ng-container matColumnDef="hora_final">
+                            <th mat-header-cell *matHeaderCellDef> Hora final </th>
+                            <td mat-cell *matCellDef="let element"> {{element.hora_final | date:'HH:mm'}} </td>
+                        </ng-container>
+            
+                        <!-- Salón -->
+                        <ng-container matColumnDef="salon">
+                            <th mat-header-cell *matHeaderCellDef> Salón </th>
+                            <td mat-cell *matCellDef="let element"> {{element.salon}} </td>
+                        </ng-container>
+            
+                        <!-- Programa educativo -->
+                        <ng-container matColumnDef="programa_educativo">
+                            <th mat-header-cell *matHeaderCellDef> Programa educativo </th>
+                            <td mat-cell *matCellDef="let element"> {{element.programa_educativo}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="editar">
+                            <th mat-header-cell *matHeaderCellDef> Actualizar </th>
+                            <td mat-cell *matCellDef="let element" class="td-editar">
+                                <i class="bi bi-pencil-square" (click)="goEditarMateria(element.id)"></i> 
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="eliminar">
+                            <th mat-header-cell *matHeaderCellDef> Eliminar </th>
+                            <td mat-cell *matCellDef="let element" class="td-eliminar"> 
+                                <i class="bi bi-trash3-fill" (click)="deleteMateria(element.id)"></i>
+                            </td>
+                        </ng-container>
+            
+                        <!-- Añade más columnas según las propiedades de tu clase Materia -->
+            
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+                    <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                                   showFirstLastButtons
+                                   aria-label="Select page of materias">
+                    </mat-paginator>
+                </div>
+                <br><br>
+            </div>
+            
+            <div class="section-buttons">
+                <!-- <button class="btn btn-primary" (click)="irARegistroMateria()">Registrar Materias</button> -->
+                <!-- <button class="btn btn-primary" (click)="irAListaMaterias()">Lista de Materias</button> -->
+            </div>
+        </div>
+    </div>
+</section>
