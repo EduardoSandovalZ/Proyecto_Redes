@@ -17,7 +17,7 @@ export class HomeScreenComponent implements OnInit, AfterViewInit {
   public token: string = "";
   public lista_usuarios: any[] = [];
 
-  displayedColumns: string[] = ['matricula', 'nombre', 'email', 'fecha_nacimiento', 'edad', 'curp', 'rfc', 'telefono', 'ocupacion', 'editar', 'eliminar'];
+  displayedColumns: string[] = ['nombre', 'email','ocupacion', 'editar', 'eliminar'];
   dataSource = new MatTableDataSource<DatosUsuario>(this.lista_usuarios as DatosUsuario[]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -175,14 +175,8 @@ export class HomeScreenComponent implements OnInit, AfterViewInit {
 // Esto va fuera de la llave que cierra la clase
 export interface DatosUsuario {
   id: number,
-  matricula: number;
   first_name: string;
   last_name: string;
   email: string;
-  fecha_nacimiento: string,
-  curp: string,
-  rfc: string,
-  edad: number,
-  telefono: string,
   ocupacion: string
 }

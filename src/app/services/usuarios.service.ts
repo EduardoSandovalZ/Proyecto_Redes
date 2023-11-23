@@ -25,17 +25,11 @@ export class UsuariosService {
 
   public esquemaUser(){
     return {
-      'matricula': '',
       'first_name': '',
       'last_name': '',
       'email': '',
       'password': '',
       'confirmar_password': '',
-      'fecha_nacimiento': '',
-      'curp': '',
-      'rfc': '',
-      'edad': '',
-      'telefono': '',
       'ocupacion': '',
     }
   }
@@ -44,10 +38,6 @@ export class UsuariosService {
   public validarUsuario(data: any, editar: boolean){
     console.log("Validando user... ", data);
     let error: any = [];
-
-    if(!this.validatorService.required(data["matricula"])){
-      error["matricula"] = this.errorService.required;
-    }
 
     if(!this.validatorService.required(data["first_name"])){
       error["first_name"] = this.errorService.required;
@@ -76,20 +66,6 @@ export class UsuariosService {
       }
     }
 
-    if(!this.validatorService.required(data["fecha_nacimiento"])){
-      error["fecha_nacimiento"] = this.errorService.required;
-    }
-
-    if(!this.validatorService.required(data["curp"])){
-      error["curp"] = this.errorService.required;
-    }else if(!this.validatorService.min(data["curp"], 18)){
-      error["curp"] = this.errorService.min(18);
-      alert("La longitud de caracteres de la CURP es menor, deben ser 18");
-    }else if(!this.validatorService.max(data["curp"], 18)){
-      error["curp"] = this.errorService.max(18);
-      alert("La longitud de caracteres de la CURP es mayor, deben ser 18");
-    }
-
     if(!this.validatorService.required(data["rfc"])){
       error["rfc"] = this.errorService.required;
     }else if(!this.validatorService.min(data["rfc"], 12)){
@@ -98,14 +74,6 @@ export class UsuariosService {
     }else if(!this.validatorService.max(data["rfc"], 13)){
       error["rfc"] = this.errorService.max(13);
       alert("La longitud de caracteres deL RFC es mayor, deben ser 13");
-    }
-
-    if(!this.validatorService.required(data["edad"])){
-      error["edad"] = this.errorService.required;
-    }
-
-    if(!this.validatorService.required(data["telefono"])){
-      error["telefono"] = this.errorService.required;
     }
 
     if(!this.validatorService.required(data["ocupacion"])){
