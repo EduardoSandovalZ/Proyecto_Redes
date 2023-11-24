@@ -7,9 +7,58 @@
                 <span class="title">Lista de usuarios</span>
                 <button class="logout" mat-flat-button color="warn" (click)="logout()">Cerrar sesión</button>
             </div>
+            <div class="body-home">
+                <div class="mat-elevation-z8">
+                    <table mat-table [dataSource]="dataSource">
+                        <!-- 1era fila -->
+                        <ng-container matColumnDef="nombre">
+                            <th mat-header-cell *matHeaderCellDef> Nombre </th>
+                            <td mat-cell *matCellDef="let element"> {{element.name}} {{element.lastname}} </td>
+                        </ng-container>
+                    
+                        <!-- 3era fila -->
+                        <ng-container matColumnDef="email">
+                            <th mat-header-cell *matHeaderCellDef> Correo electrónico </th>
+                            <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="telefono">
+                            <th mat-header-cell *matHeaderCellDef> Teléfono </th>
+                            <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="role">
+                            <th mat-header-cell *matHeaderCellDef> Role </th>
+                            <td mat-cell *matCellDef="let element"> {{element.role}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="editar">
+                            <th mat-header-cell *matHeaderCellDef> Actualizar </th>
+                            <td mat-cell *matCellDef="let element" class="td-editar">
+                                <i class="bi bi-pencil-square" (click)="goEditar(element.id)"></i> 
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="eliminar">
+                            <th mat-header-cell *matHeaderCellDef> Eliminar </th>
+                            <td mat-cell *matCellDef="let element" class="td-eliminar"> 
+                                <i class="bi bi-trash3-fill" (click)="delete(element.id)"></i>
+                            </td>
+                        </ng-container>
+                    
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+                    <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                                   showFirstLastButtons
+                                   aria-label="Select page of periodic elements">
+                    </mat-paginator>
+                </div>
+                <br><br>
+            </div>
             <div class="section-buttons">
-                <!-- Botón de Transferir -->
-                <button class="btn btn-primary" (click)="transferir()">Transferir</button>
+                <button class="btn btn-primary" (click)="irARegistroMateria()">Registrar Materias</button>
+                <button class="btn btn-primary" (click)="irAListaMaterias()">Lista de Materias</button>
             </div>
         </div>
     </div>

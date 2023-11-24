@@ -34,7 +34,6 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { EditarMateriaModalComponent } from './modals/editar-materia-modal/editar-materia-modal.component';
 import { ModificarMateriaModalComponent } from './modals/modificar-materia-modal/modificar-materia-modal.component';
-import { TransferirScreenComponent } from './screens/transferir-screen/transferir-screen.component';
 
 @NgModule({
   declarations: [
@@ -48,8 +47,7 @@ import { TransferirScreenComponent } from './screens/transferir-screen/transferi
     RegistroMateriaScreenComponent,
     EliminarMateriaModalComponent,
     EditarMateriaModalComponent,
-    ModificarMateriaModalComponent,
-    TransferirScreenComponent
+    ModificarMateriaModalComponent
   ],
   imports: [
     BrowserModule,
