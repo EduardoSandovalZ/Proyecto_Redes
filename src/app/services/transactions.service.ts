@@ -33,6 +33,8 @@ export class TransactionsService {
 
   // Servicio para realizar una transferencia
   public realizarTransferencia(data: any): Observable<any> {
+    data.ammount = Number(data.ammount)
+    console.log(data)
     console.log('Enviando solicitud de transferencia a:', `${environment.url_api}/api/transactions/`);
     return this.http.post<any>(`${environment.url_api}/api/transactions/`, data, httpOptions);
   }

@@ -15,12 +15,12 @@ import { jwtDecode } from "jwt-decode";
 })
 export class HomeScreenComponent implements OnInit, AfterViewInit {
   public token: string = "";
-  public lista_usuarios: any[] = [];
+  public lista_cuentas: any[] = [];
   userId: string = '';
   errors: any = {};
 
-  displayedColumns: string[] = ['nombre', 'email','phone','role', 'editar', 'eliminar'];
-  dataSource = new MatTableDataSource<DatosUsuario>(this.lista_usuarios as DatosUsuario[]);
+  displayedColumns: string[] = ['Cuenta', 'Balance'];
+  dataSource = new MatTableDataSource<DatosCuenta>(this.lista_cuentas as DatosCuenta[]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -175,4 +175,9 @@ export interface DatosUsuario {
   email: string;
   phone: string,
   role: string
+}
+
+export interface DatosCuenta {
+  uid: string,
+  balance: number;
 }
