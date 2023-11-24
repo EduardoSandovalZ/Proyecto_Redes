@@ -14,7 +14,7 @@ export class RegistroScreenComponent implements OnInit, AfterViewInit {
   // Variables del componente registro
   @ViewChild('telefonoInput') telefonoInput?: ElementRef;
   public user: any = {
-    first_name: '',
+    name: '',
     last_name: '',
     email: '',
     password: '',

@@ -25,7 +25,7 @@ export class UsuariosService {
 
   public esquemaUser(){
     return {
-      'first_name': '',
+      'name': '',
       'last_name': '',
       'email': '',
       'password': '',
@@ -40,8 +40,8 @@ export class UsuariosService {
     console.log("Validando user... ", data);
     let error: any = [];
 
-    if(!this.validatorService.required(data["first_name"])){
-      error["first_name"] = this.errorService.required;
+    if(!this.validatorService.required(data["name"])){
+      error["name"] = this.errorService.required;
     }
 
     if(!this.validatorService.required(data["last_name"])){
@@ -67,15 +67,7 @@ export class UsuariosService {
       }
     }
 
-    if(!this.validatorService.required(data["rfc"])){
-      error["rfc"] = this.errorService.required;
-    }else if(!this.validatorService.min(data["rfc"], 12)){
-      error["rfc"] = this.errorService.min(12);
-      alert("La longitud de caracteres deL RFC es menor, deben ser 12");
-    }else if(!this.validatorService.max(data["rfc"], 13)){
-      error["rfc"] = this.errorService.max(13);
-      alert("La longitud de caracteres deL RFC es mayor, deben ser 13");
-    }
+    
 
     if(!this.validatorService.required(data["role"])){
       error["role"] = this.errorService.required;

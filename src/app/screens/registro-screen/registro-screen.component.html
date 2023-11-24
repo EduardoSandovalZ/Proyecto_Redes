@@ -11,9 +11,9 @@
             <div class="body-registro">
                 <mat-form-field class="mat-input" appearance="outline">
                     <mat-label>Nombre</mat-label>
-                    <input matInput [(ngModel)]="user.first_name" placeholder="Escribe nombre">
+                    <input matInput [(ngModel)]="user.name" placeholder="Escribe nombre">
                 </mat-form-field>
-                <div *ngIf="errors.first_name" class="invalid-feedback">{{ errors.first_name }}</div>
+                <div *ngIf="errors.name" class="invalid-feedback">{{ errors.name }}</div>
     
                 <mat-form-field class="mat-input" appearance="outline">
                     <mat-label>Apellidos</mat-label>
