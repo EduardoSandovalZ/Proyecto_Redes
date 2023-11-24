@@ -47,32 +47,6 @@ export class HomeScreenComponent implements OnInit, AfterViewInit {
     //aqui fue donde le movi
     this.initPaginator();
   }
-
-  // Para paginacion
-  // Paginador para Agentes
-
-  /**
-   * public initPaginator() {
-    this.dataSource.paginator = this.paginator;
-    // Modificar etiquetas del paginador a español
-    this.paginator._intl.itemsPerPageLabel = 'Registros por página';
-    this.paginator._intl.getRangeLabel = (page: number, pageSize: number, length: number) => {
-      if (length === 0 || pageSize === 0) {
-        return `0 / ${length}`;
-      }
-      length = Math.max(length, 0);
-      const startIndex = page * pageSize;
-      const endIndex = startIndex < length ? Math.min(startIndex + pageSize, length) : startIndex + pageSize;
-      return `${startIndex + 1} - ${endIndex} de ${length}`;
-    };
-    this.paginator._intl.firstPageLabel = 'Primera página';
-    this.paginator._intl.lastPageLabel = 'Última página';
-    this.paginator._intl.previousPageLabel = 'Página anterior';
-    this.paginator._intl.nextPageLabel = 'Página siguiente';
-  }
-   * 
-   * 
-   */
   
 
 
@@ -168,6 +142,10 @@ export class HomeScreenComponent implements OnInit, AfterViewInit {
       }
     });
 
+  }
+  public transferir() {
+    // Lógica para la transferencia, por ejemplo, redirigir a la pantalla de transferencia
+    this.router.navigate(['/transferir-screen']);
   }
 
 }

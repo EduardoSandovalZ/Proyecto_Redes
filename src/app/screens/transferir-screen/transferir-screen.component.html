@@ -1,0 +1,35 @@
+<section class="transferencia-screen">
+    <div class="wrapper">
+        <div class="section-transferencia">
+            <div class="header-transferencia">
+                <mat-icon class="icon-back" (click)="regresar()">arrow_back</mat-icon>
+                <span class="title">Transferir Dinero</span>
+                <mat-icon class="icon-forward">arrow_forward</mat-icon>
+            </div>
+            <div class="body-transferencia">
+                <mat-form-field class="mat-input" appearance="outline">
+                    <mat-label>Cuenta de origen</mat-label>
+                    <input matInput [(ngModel)]="accountId" placeholder="Ingrese el número de cuenta">
+                </mat-form-field>
+                <div *ngIf="errors.accountId" class="invalid-feedback">{{ errors.accountId }}</div>
+    
+                <mat-form-field class="mat-input" appearance="outline">
+                    <mat-label>Cuenta de destino</mat-label>
+                    <input matInput [(ngModel)]="targetAccountId" placeholder="Ingrese el número de cuenta destino">
+                </mat-form-field>
+                <div *ngIf="errors.targetAccountId" class="invalid-feedback">{{ errors.targetAccountId }}</div>
+    
+                <mat-form-field class="mat-input" appearance="outline">
+                    <mat-label>Monto a transferir</mat-label>
+                    <input matInput [(ngModel)]="ammount" placeholder="Ingrese el monto">
+                </mat-form-field>
+                <div *ngIf="errors.ammount" class="invalid-feedback">{{ errors.ammount }}</div>
+
+                <div class="section-buttons">
+                    <button class="btn btn-danger" (click)="regresar()">Cancelar</button>
+                    <button class="btn btn-primary" type="submit" (click)="transferir()">Transferir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
