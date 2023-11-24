@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FacadeService } from 'src/app/services/facade.service';
 import { TransactionsService } from 'src/app/services/transactions.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-transferir-screen',
@@ -17,11 +18,15 @@ export class TransferirScreenComponent {
   constructor(
     private router: Router,
     private facadeService: FacadeService,
-    private transactionsService: TransactionsService
+    private transactionsService: TransactionsService,
+    private location: Location,
   ) { }
 
   ngOnInit(): void {
     // Aquí puedes cargar la información de las cuentas
+  }
+  public regresar() {
+    this.location.back();
   }
   public transferir(): void {
     this.errors = {};
