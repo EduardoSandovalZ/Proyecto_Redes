@@ -15,12 +15,12 @@ import { jwtDecode } from "jwt-decode";
 })
 export class HomeScreenComponent implements OnInit, AfterViewInit {
   public token: string = "";
-  public lista_cuentas: any[] = [];
+  listaCuentas: DatosCuenta={BankAccount:[]};
   userId: string = '';
   errors: any = {};
 
-  displayedColumns: string[] = ['Cuenta', 'Balance'];
-  dataSource = new MatTableDataSource<DatosCuenta>(this.lista_cuentas as DatosCuenta[]);
+  displayedColumns: string[] = ['uid', 'balance'];
+  dataSource = new MatTableDataSource<DatosCuenta>(this.listaCuentas.BankAccount);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -36,6 +36,7 @@ export class HomeScreenComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit(): void {
+    
     // Validar que haya inicio de sesión
     // Obtengo el token del login
     this.token = this.facadeService.getSessionToken();
@@ -54,9 +55,25 @@ export class HomeScreenComponent implements OnInit, AfterViewInit {
     this.userId = jwt_payload.uid;
     console.log(this.userId)
     // Mandar a ejecutar la función
-    
+    this.obtenerCuentasUsuario(this.userId);
     //aqui fue donde le movi
     this.initPaginator();
+    
+  }
+
+  obtenerCuentasUsuario(userId: string) {
+    this.usuariosService.obtenerCuentasUsuario(userId).subscribe(
+      (cuentas) => {
+        console.log(cuentas)
+        this.listaCuentas = cuentas;
+        console.log(this.listaCuentas)
+        this.dataSource.data = this.listaCuentas.BankAccount;
+        console.log(this.dataSource.data)
+      },
+      (error) => {
+        console.error('Error al obtener cuentas de usuario:', error);
+      }
+    );
   }
 
   public crearCuentaBanco() {
@@ -178,6 +195,12 @@ export interface DatosUsuario {
 }
 
 export interface DatosCuenta {
-  uid: string,
-  balance: number;
+  BankAccount:Array<any>;
 }
+
+​​​
+uid: "65604a5c5669d1a2945b8e94"
+​​​
+updatedAt: "2023-11-24T09:00:23.284Z"
+​​​
+userId: "65600ef35669d1a2945b8e91"

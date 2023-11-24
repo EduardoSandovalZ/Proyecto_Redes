@@ -104,7 +104,19 @@ export class UsuariosService {
     var headers = new HttpHeaders({ 'Content-Type': 'application/json' , 'x-token': token});
     return this.http.post<any>(`${environment.url_api}/api/bankAccount/${userId}`, { userId }, {headers});
   }
+  public obtenerCuentasUsuario(userId: string): Observable<any> {
+    console.log('jala puta2')
+    const token = this.facadeService.getSessionToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'x-token': token });
+    let jalaputa2 = this.http.get<DatosCuenta[]>(`${environment.url_api}/api/bankAccount/${userId}`, { headers });
+    console.log(jalaputa2)
+    return jalaputa2
+  }
   
   
   
+}
+export interface DatosCuenta {
+  uid: string,
+  balance: number;
 }
