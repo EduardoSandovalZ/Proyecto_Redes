@@ -16,7 +16,7 @@ import { EliminarUserModalComponent } from 'src/app/modals/eliminar-user-modal/e
 export class HomeScreenComponent implements OnInit, AfterViewInit {
   public token: string = "";
   public lista_usuarios: any[] = [];
-  uid: string = '';
+  userId: string = '';
   errors: any = {};
 
   displayedColumns: string[] = ['nombre', 'email','phone','role', 'editar', 'eliminar'];
@@ -51,8 +51,8 @@ export class HomeScreenComponent implements OnInit, AfterViewInit {
   }
 
   public crearCuentaBanco() {
-    if (this.uid) {
-      this.usuariosService.crearCuentaBanco(this.uid).subscribe(
+    if (this.userId) {
+      this.usuariosService.crearCuentaBanco(this.userId).subscribe(
         (response) => {
           // Maneja la respuesta del servidor, puedes mostrar un mensaje de éxito u otra acción necesaria
           console.log('Cuenta de banco creada exitosamente:', response);
@@ -64,7 +64,7 @@ export class HomeScreenComponent implements OnInit, AfterViewInit {
       );
     } else {
       // Maneja el caso cuando el userId no está disponible
-      console.log(this,this.uid)
+      console.log(this,this.userId)
       console.error('UserId no disponible para crear la cuenta de banco.');
     }
   }
