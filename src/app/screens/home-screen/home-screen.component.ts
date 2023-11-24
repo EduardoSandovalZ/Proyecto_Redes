@@ -6,7 +6,7 @@ import { FacadeService } from 'src/app/services/facade.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import { MatDialog } from '@angular/material/dialog';
 import { EliminarUserModalComponent } from 'src/app/modals/eliminar-user-modal/eliminar-user-modal.component';
-
+import { jwtDecode } from "jwt-decode";
 
 @Component({
   selector: 'app-home-screen',
@@ -44,6 +44,15 @@ export class HomeScreenComponent implements OnInit, AfterViewInit {
     if (this.token == "") {
       this.router.navigate([""]);
     }
+    interface JwtPayload {
+      uid: string;
+      role: string;
+      iat: number;
+      exp: number;
+    }
+    const jwt_payload: JwtPayload = jwtDecode(this.token);
+    this.userId = jwt_payload.uid;
+    console.log(this.userId)
     // Mandar a ejecutar la función
     
     //aqui fue donde le movi
@@ -52,6 +61,7 @@ export class HomeScreenComponent implements OnInit, AfterViewInit {
 
   public crearCuentaBanco() {
     if (this.userId) {
+      console.log(this.userId)
       this.usuariosService.crearCuentaBanco(this.userId).subscribe(
         (response) => {
           // Maneja la respuesta del servidor, puedes mostrar un mensaje de éxito u otra acción necesaria

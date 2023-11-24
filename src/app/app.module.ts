@@ -49,7 +49,8 @@ import { TransferirScreenComponent } from './screens/transferir-screen/transferi
     EliminarMateriaModalComponent,
     EditarMateriaModalComponent,
     ModificarMateriaModalComponent,
-    TransferirScreenComponent
+    TransferirScreenComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -68,7 +69,7 @@ import { TransferirScreenComponent } from './screens/transferir-screen/transferi
     MatSelectModule,
     ReactiveFormsModule,
     MtxDatetimepickerModule,
-    NgxMaterialTimepickerModule
+    NgxMaterialTimepickerModule,
     
   ],
   providers: [
