@@ -30,7 +30,8 @@ export class UsuariosService {
       'email': '',
       'password': '',
       'confirmar_password': '',
-      'ocupacion': '',
+      'phone':'',
+      'role': '',
     }
   }
 
@@ -76,8 +77,8 @@ export class UsuariosService {
       alert("La longitud de caracteres deL RFC es mayor, deben ser 13");
     }
 
-    if(!this.validatorService.required(data["ocupacion"])){
-      error["ocupacion"] = this.errorService.required;
+    if(!this.validatorService.required(data["role"])){
+      error["role"] = this.errorService.required;
     }
 
     return error;
@@ -85,8 +86,9 @@ export class UsuariosService {
 
   //Aquí van los servicios HTTP
   //Servicio para registrar un nuevo usuario
-  public registrarUsuario (data: any): Observable <any>{
-    return this.http.post<any>(`${environment.url_api}/users/`,data, httpOptions);
+  public registrarUsuario(data: any): Observable<any> {
+    console.log('Enviando solicitud a:', `${environment.url_api}/api/usuarios/`); // Agregamos este log
+    return this.http.post<any>(`${environment.url_api}/api/usuarios/`, data, httpOptions);
   }
   //Servicio para obtener la lista de usuarios
   public obtenerListaUsers (): Observable <any>{
@@ -98,15 +100,6 @@ export class UsuariosService {
     return this.http.get<any>(`${environment.url_api}/users/?id=${idUser}`,httpOptions); 
   }
   
-  //Servicio para editar
-  public editarUsuario (data: any): Observable <any>{
-    var token = this.facadeService.getSessionToken();
-    var headers = new HttpHeaders({ 'Content-Type': 'application/json' , 'Authorization': 'Bearer '+token});
-    return this.http.put<any>(`${environment.url_api}/users-edit/`, data, {headers:headers});
-  }
-  public eliminarUsuario(idUser: number): Observable <any>{
-    var token = this.facadeService.getSessionToken();
-    var headers = new HttpHeaders({ 'Content-Type': 'application/json' , 'Authorization': 'Bearer '+token});
-    return this.http.delete<any>(`${environment.url_api}/users-edit/?id=${idUser}`,{headers:headers});
-  }
+  
+  
 }

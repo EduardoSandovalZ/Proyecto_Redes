@@ -5,8 +5,7 @@
             <!-- Va a mostrar el título en la cabecera del componente -->
             <div class="header-registro">
                 <mat-icon class="icon-back" (click)="regresar()">arrow_back</mat-icon>
-                <span *ngIf="!editar" class="title">Registrarse</span>
-                <span *ngIf="editar" class="title">Actualizar usuario</span>
+                <span class="title">Registrarse</span>
                 <mat-icon class="icon-forward">arrow_forward</mat-icon>
             </div>
             <div class="body-registro">
@@ -24,18 +23,18 @@
     
                 <mat-form-field class="mat-input" appearance="outline">
                     <mat-label>Correo electrónico</mat-label>
-                    <input matInput [(ngModel)]="user.email" placeholder="Escribe correo electrónico" [disabled]="editar">
+                    <input matInput [(ngModel)]="user.email" placeholder="Escribe correo electrónico" >
                 </mat-form-field>
                 <div *ngIf="errors.email" class="invalid-feedback">{{ errors.email }}</div>
 
-                <mat-form-field class="mat-input" appearance="outline" *ngIf="!editar">
+                <mat-form-field class="mat-input" appearance="outline" >
                     <mat-label>Contraseña</mat-label>
                     <input matInput [(ngModel)]="user.password" type="{{ inputType_1 }}" placeholder="Escribe contraseña">
                     <mat-icon matSuffix class="eye-icon" (click)="showPassword()">{{hide_1 ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </mat-form-field>
                 <div *ngIf="errors.password" class="invalid-feedback">{{ errors.password }}</div>
     
-                <mat-form-field class="mat-input" appearance="outline" *ngIf="!editar">
+                <mat-form-field class="mat-input" appearance="outline">
                     <mat-label>Confirmar contraseña</mat-label>
                     <input matInput [(ngModel)]="user.confirmar_password" type="{{ inputType_2 }}" placeholder="Confirma la contraseña">
                     <mat-icon matSuffix class="eye-icon" (click)="showPwdConfirmar()">{{hide_2 ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -43,15 +42,20 @@
                 <div *ngIf="errors.confirmar_password" class="invalid-feedback">{{ errors.confirmar_password }}</div>
 
                 <mat-form-field class="mat-input" appearance="outline">
-                    <mat-label>Ocupación</mat-label>
-                    <input matInput [(ngModel)]="user.ocupacion" placeholder="Escribe teléfono">
+                    <mat-label>Teléfono</mat-label>
+                    <input #telefonoInput matInput [(ngModel)]="user.phone" pattern="(000) 000-0000" maxlength="14" placeholder="Escribe teléfono" (input)="formatearTelefono()">
                 </mat-form-field>
-                <div *ngIf="errors.ocupacion" class="invalid-feedback">{{ errors.ocupacion }}</div>
+                <div *ngIf="errors.telefono" class="invalid-feedback">{{ errors.telefono }}</div>
+
+                <mat-form-field class="mat-input" appearance="outline">
+                    <mat-label>Role</mat-label>
+                    <input matInput [(ngModel)]="user.role" placeholder="Escribe teléfono">
+                </mat-form-field>
+                <div *ngIf="errors.role" class="invalid-feedback">{{ errors.role }}</div>
 
                 <div class="section-buttons">
                     <button class="btn btn-danger" (click)="regresar()">Cancelar</button>
-                    <button *ngIf="!editar" class="btn btn-primary" type="submit" (click)="registrar()">Registrar</button>
-                    <button *ngIf="editar" class="btn btn-primary" type="submit" (click)="actualizar()">Actualizar</button>
+                    <button class="btn btn-primary" type="submit" (click)="registrar()">Registrar</button>
                 </div>
             </div>
         </div>

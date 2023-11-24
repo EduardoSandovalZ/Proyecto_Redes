@@ -12,18 +12,22 @@ declare var $: any;
 })
 export class RegistroScreenComponent implements OnInit, AfterViewInit {
   // Variables del componente registro
-
-  public editar: boolean = false;
-  public user: any = {};
-  // Para contraseñas
+  @ViewChild('telefonoInput') telefonoInput?: ElementRef;
+  public user: any = {
+    first_name: '',
+    last_name: '',
+    email: '',
+    password: '',
+    confirmar_password: '',
+    role: '',
+    telefono: '', // Cambiando 'phone' a 'telefono'
+  };
   public hide_1: boolean = false;
   public hide_2: boolean = false;
   public inputType_1: string = 'password';
   public inputType_2: string = 'password';
-  // Para detectar errores
   public errors: any = {};
-  public datePickerOptions: any;
-  public idUser: number = 0;
+  // public idUser: number = 0;
   constructor(
     private location: Location,
     private usuariosService: UsuariosService,
@@ -35,47 +39,19 @@ export class RegistroScreenComponent implements OnInit, AfterViewInit {
     this.user = this.usuariosService.esquemaUser();
     // Imprimir datos en consola
     console.log("User: ", this.user);
-    if(this.activatedRoute.snapshot.params['id'] != undefined){
-      this.editar = true;
-      //Asignamos a nuestra variable global el valor del ID que viene por la URL
-      this.idUser = this.activatedRoute.snapshot.params['id'];
-      console.log("ID User: ", this.idUser);
-      //Al iniciar la vista obtiene el usuario por su ID
-      this.obtenerUserByID();
-    }
-
-    // Configurar rango de fechas permitido
-    const currentYear = new Date().getFullYear();
-    const minDate = new Date(1900, 0, 1); // Puedes ajustar el año según tus necesidades
-    const maxDate = new Date(currentYear, 11, 31); // Hasta la fecha actual
-
-    this.datePickerOptions = {
-      min: minDate,
-      max: maxDate,
-    };
+    
   }
 
   ngAfterViewInit() {
+    if (this.telefonoInput) {
+      // Acceder al elemento solo si está definido
+    }
   }
 
   public regresar() {
     this.location.back();
   }
-  //Función para obtener un solo usuario por su ID
-  public obtenerUserByID(){
-    this.usuariosService.getUserByID(this.idUser).subscribe(
-      (response)=>{
-        this.user = response;
-        //Agregamos valores faltantes
-        this.user.first_name = response.user.first_name;
-        this.user.last_name = response.user.last_name;
-        this.user.email = response.user.email;
-        console.log("Datos user: ", this.user);
-      }, (error)=>{
-        alert("No se pudieron obtener los datos del usuario para editar");
-      }
-    );
-  }
+  
 
   // Funciones para password
   showPassword() {
@@ -100,77 +76,46 @@ export class RegistroScreenComponent implements OnInit, AfterViewInit {
     }
   }
 
-  //Función para editar usuario
-  public actualizar(): boolean {
-    // Validar
-    this.errors = this.usuariosService.validarUsuario(this.user, this.editar);
-    if (!$.isEmptyObject(this.errors)) {
-      return false;
+  formatearTelefono() {
+    if (this.telefonoInput && this.telefonoInput.nativeElement && this.telefonoInput.nativeElement.value) {
+      const valor = this.telefonoInput.nativeElement.value;
+      const valorNumerico = valor.replace(/\D/g, '');
+      const formato = "(000) 000-0000";
+      let valorFormateado = "";
+      let j = 0;
+      for (let i = 0; i < formato.length; i++) {
+        if (formato[i] === '0') {
+          valorFormateado += valorNumerico[j] || ''; 
+          j++;
+        } else {
+          valorFormateado += formato[i];
+        }
+      }
+      this.user.phone = valorFormateado;
+    } else {
+      console.error('this.telefonoInput, this.telefonoInput.nativeElement o su valor es undefined');
     }
-    console.log("Pasó la validación");
-    
-    // Mandar a registrar los datos
-    this.usuariosService.editarUsuario(this.user).subscribe(
-      (response) => {
-        alert("Usuario editado correctamente");
-        console.log("Usuario editado: ", response);
-        // Si se editó, entonces mandar al home
-        this.router.navigate(["home"]);
-      },
-      (error) => {
-        alert("No se pudo editar usuario");
-      }
-    );
+  }
+
+  public registrar(): void {
+    console.log('Registrando usuario:', this.user); // Agregamos este log
+    this.errors = this.usuariosService.validarUsuario(this.user, false);
   
-    // Devolver true si todo está bien
-    return true;
+    if (Object.keys(this.errors).length === 0) {
+      this.usuariosService.registrarUsuario(this.user).subscribe(
+        (response) => {
+          console.log('Respuesta del servidor:', response); // Agregamos este log
+          alert("Usuario registrado correctamente");
+          console.log("Usuario registrado: ", response);
+          this.router.navigate(["/"]);
+        },
+        (error) => {
+          console.error('Error al registrar usuario:', error); // Agregamos este log
+          alert("No se pudo registrar usuario");
+        }
+      );
+    }
   }
   
   
-  
-
-  public registrar(): Promise<boolean> {
-    return new Promise((resolve) => {
-      // Validar
-      this.errors = [];
-
-      this.errors = this.usuariosService.validarUsuario(this.user, this.editar);
-      if (!$.isEmptyObject(this.errors)) {
-        resolve(false);
-      }
-
-      //Mandar a registrar los datos
-     this.usuariosService.registrarUsuario(this.user).subscribe(
-      (response)=>{
-        alert("Usuario registrado correctamente");
-        console.log("Usuario registrado: ", response);
-        //Si se registró, entonces mandar al login
-        this.router.navigate(["/"]);
-      }, (error)=>{
-        alert("No se pudo registrar usuario");
-      }
-     );
-      // Validar la contraseña
-      if (this.user.password == this.user.confirmar_password) {
-        // Aquí si todo es correcto vamos a registrar - aquí se manda a llamar al servicio
-        this.usuariosService.registrarUsuario(this.user).subscribe(
-          (response) => {
-            alert("Usuario registrado correctamente");
-            console.log("Usuario registrado: ", response);
-            this.router.navigate(["/"]);
-            resolve(true);
-          },
-          (error) => {
-            alert("No se pudo registrar usuario");
-            resolve(false);
-          }
-        );
-      } else {
-        alert("Las contraseñas no coinciden");
-        this.user.password = "";
-        this.user.confirmar_password = "";
-        resolve(false);
-      }
-    });
-  }
 }

@@ -22,16 +22,6 @@ export class EliminarUserModalComponent {
     this.dialogRef.close({isDelete:false});
   }
 
-  public eliminarUser(){
-    this.usuariosServices.eliminarUsuario(this.data.id).subscribe(
-      (response) => {
-        console.log(response);
-        this.dialogRef.close({isDelete:true});
-      },(error)=>{
-        alert("Usuario no eliminado "+ error);
-        this.dialogRef.close({isDelete:false});
-      }
-    );
-  }
+  
 
 }
