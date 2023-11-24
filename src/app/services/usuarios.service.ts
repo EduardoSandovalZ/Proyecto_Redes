@@ -86,7 +86,7 @@ export class UsuariosService {
   public obtenerListaUsers (): Observable <any>{
     var token = this.facadeService.getSessionToken();
     var headers = new HttpHeaders({ 'Content-Type': 'application/json' , 'Authorization': 'Bearer '+token});
-    return this.http.get<any>(`${environment.url_api}/lista-users/`, {headers:headers});
+    return this.http.get<any>(`${environment.url_api}/lista-users/`, {headers});
   }
   public getUserByID(idUser: Number){
     return this.http.get<any>(`${environment.url_api}/users/?id=${idUser}`,httpOptions); 
@@ -95,7 +95,14 @@ export class UsuariosService {
     return this.http.post<any>(`${environment.url_api}/api/transactions/`, data, httpOptions);
   }
   public crearCuentaBanco(userId: string): Observable<any> {
-    return this.http.post<any>(`${environment.url_api}/api/bankAccount`, { userId }, httpOptions);
+    var token = this.facadeService.getSessionToken();
+    var headers = new HttpHeaders({ 'Content-Type': 'application/json' , 'x-token': token});
+    return this.http.post<any>(`${environment.url_api}/api/bankAccount`, { userId }, {headers});
+  }
+  public obtenerCuentaBanco(userId: string): Observable<any> {
+    var token = this.facadeService.getSessionToken();
+    var headers = new HttpHeaders({ 'Content-Type': 'application/json' , 'x-token': token});
+    return this.http.post<any>(`${environment.url_api}/api/bankAccount/${userId}`, { userId }, {headers});
   }
   
   
