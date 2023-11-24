@@ -5,6 +5,7 @@ import { RegistroScreenComponent } from './screens/registro-screen/registro-scre
 import { HomeScreenComponent } from './screens/home-screen/home-screen.component';
 import { RegistroMateriaScreenComponent } from './screens/registro-materia-screen/registro-materia-screen.component';
 import { HomeMateriaScreenComponent } from './screens/home-materia-screen/home-materia-screen.component';
+import { TransferirScreenComponent } from './screens/transferir-screen/transferir-screen.component';
 
 const routes: Routes = [
   { path: '', component: LoginScreenComponent, pathMatch: 'full' },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'home', component: HomeScreenComponent, pathMatch: 'full' },
   { path: 'home-materia-screen', component: HomeMateriaScreenComponent, pathMatch: 'full'  },
   { path: 'registro-materia', component: RegistroMateriaScreenComponent, pathMatch: 'full'  },
+  { path: 'transferir', component: TransferirScreenComponent, pathMatch: 'full'  },
   { path: 'registro-materia/:id', component: RegistroMateriaScreenComponent, pathMatch: 'full'  },
 
   

@@ -91,6 +91,12 @@ export class UsuariosService {
   public getUserByID(idUser: Number){
     return this.http.get<any>(`${environment.url_api}/users/?id=${idUser}`,httpOptions); 
   }
+  public realizarTransferencia(data: any): Observable<any> {
+    return this.http.post<any>(`${environment.url_api}/api/transactions/`, data, httpOptions);
+  }
+  public crearCuentaBanco(uid: string): Observable<any> {
+    return this.http.post<any>(`${environment.url_api}/api/bankAccount`, { uid }, httpOptions);
+  }
   
   
   

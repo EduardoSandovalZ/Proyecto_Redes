@@ -130,30 +130,7 @@ export class RegistroMateriaScreenComponent implements OnInit {
     
 
   // }
-  public goEditarMateria(): boolean {
-    
-    if (!$.isEmptyObject(this.errors)) {
-      return false;
-    }
-    console.log("Pasó la validación");
-    
-    // Mandar a registrar los datos
-    this.materiaService.editarMateria(this.materia).subscribe(
-      (response) => {
-        alert("Usuario editado correctamente");
-        console.log("Usuario editado: ", response);
-        // Si se editó, entonces mandar al home
-        this.router.navigate(["home"]);
-      },
-      (error) => {
-        alert("No se pudo editar usuario");
-      }
-    );
   
-    // Devolver true si todo está bien
-    return true;
-
-  }
 
   formatearHora(hora: string): string {
     const date = new Date();

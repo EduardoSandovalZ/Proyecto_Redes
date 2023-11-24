@@ -16,6 +16,8 @@ import { EliminarUserModalComponent } from 'src/app/modals/eliminar-user-modal/e
 export class HomeScreenComponent implements OnInit, AfterViewInit {
   public token: string = "";
   public lista_usuarios: any[] = [];
+  uid: string = '';
+  errors: any = {};
 
   displayedColumns: string[] = ['nombre', 'email','phone','role', 'editar', 'eliminar'];
   dataSource = new MatTableDataSource<DatosUsuario>(this.lista_usuarios as DatosUsuario[]);
@@ -43,36 +45,39 @@ export class HomeScreenComponent implements OnInit, AfterViewInit {
       this.router.navigate([""]);
     }
     // Mandar a ejecutar la función
-    this.obtenerUsuarios();
+    
     //aqui fue donde le movi
     this.initPaginator();
   }
 
-  // Para paginacion
-  // Paginador para Agentes
-
-  /**
-   * public initPaginator() {
-    this.dataSource.paginator = this.paginator;
-    // Modificar etiquetas del paginador a español
-    this.paginator._intl.itemsPerPageLabel = 'Registros por página';
-    this.paginator._intl.getRangeLabel = (page: number, pageSize: number, length: number) => {
-      if (length === 0 || pageSize === 0) {
-        return `0 / ${length}`;
-      }
-      length = Math.max(length, 0);
-      const startIndex = page * pageSize;
-      const endIndex = startIndex < length ? Math.min(startIndex + pageSize, length) : startIndex + pageSize;
-      return `${startIndex + 1} - ${endIndex} de ${length}`;
-    };
-    this.paginator._intl.firstPageLabel = 'Primera página';
-    this.paginator._intl.lastPageLabel = 'Última página';
-    this.paginator._intl.previousPageLabel = 'Página anterior';
-    this.paginator._intl.nextPageLabel = 'Página siguiente';
+  public crearCuentaBanco() {
+    if (this.uid) {
+      this.usuariosService.crearCuentaBanco(this.uid).subscribe(
+        (response) => {
+          // Maneja la respuesta del servidor, puedes mostrar un mensaje de éxito u otra acción necesaria
+          console.log('Cuenta de banco creada exitosamente:', response);
+        },
+        (error) => {
+          // Maneja los errores, puedes mostrar un mensaje de error o tomar la acción adecuada
+          console.error('Error al crear la cuenta de banco:', error);
+        }
+      );
+    } else {
+      // Maneja el caso cuando el userId no está disponible
+      console.log(this,this.uid)
+      console.error('UserId no disponible para crear la cuenta de banco.');
+    }
   }
-   * 
-   * 
-   */
+
+  public realizarTransferencia() {
+    // Navega a la pantalla "transferir-screen"
+    this.router.navigate(['/transferir']);
+  }
+
+  public retirarDinero(){
+    
+
+  }
   
 
 
@@ -103,27 +108,7 @@ export class HomeScreenComponent implements OnInit, AfterViewInit {
 
 
   // Obtener lista de usuarios
-  public obtenerUsuarios() {
-    this.usuariosService.obtenerListaUsers().subscribe(
-      (response) => {
-        this.lista_usuarios = response;
-        console.log("Lista users: ", this.lista_usuarios);
-        if (this.lista_usuarios.length > 0) {
-          // Agregar datos del nombre e email
-          this.lista_usuarios.forEach(usuario => {
-            usuario.name = usuario.user.name;
-            usuario.lastname = usuario.user.name;
-            usuario.email = usuario.user.email;
-          });
-          console.log("Otro user: ", this.lista_usuarios);
-
-          this.dataSource = new MatTableDataSource<DatosUsuario>(this.lista_usuarios as DatosUsuario[]);
-        }
-      }, (error) => {
-        alert("No se pudo obtener la lista de usuarios");
-      }
-    );
-  }
+  
 
   // Cerrar sesión
   public logout() {
