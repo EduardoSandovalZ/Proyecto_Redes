@@ -11,7 +11,7 @@ declare var $: any;
 export class LoginScreenComponent implements OnInit {
 
   public type: String = "password";
-  public username: String = "";
+  public email: String = "";
   public password: String = "";
 
   public errors:any = {};
@@ -26,7 +26,7 @@ export class LoginScreenComponent implements OnInit {
 
   public login(): void {
     // Validar
-    this.errors = this.facadeService.validarLogin(this.username, this.password);
+    this.errors = this.facadeService.validarLogin(this.email, this.password);
     
     if (!$.isEmptyObject(this.errors)) {
         // Mostrar mensajes de error u otras acciones necesarias
@@ -34,7 +34,7 @@ export class LoginScreenComponent implements OnInit {
     }
     
     // Si pasa la validación, intentar iniciar sesión
-    this.facadeService.login(this.username, this.password).subscribe(
+    this.facadeService.login(this.email, this.password).subscribe(
         (response) => {
             this.facadeService.saveUserData(response);
             this.router.navigate(["home"]);

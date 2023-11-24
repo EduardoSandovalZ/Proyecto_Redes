@@ -34,21 +34,21 @@ export class FacadeService {
   ) { }
 
   //Funcion para validar login
-  public validarLogin(username: String, password: String){
+  public validarLogin(email: String, password: String){
     var data = {
-      "username": username,
+      "email": email,
       "password": password
     }
     console.log("Validando login... ", data);
     let error: any = [];
 
-    if(!this.validatorService.required(data["username"])){
-      error["username"] = this.errorService.required;
-    }else if(!this.validatorService.max(data["username"], 40)){
-      error["username"] = this.errorService.max(40);
+    if(!this.validatorService.required(data["email"])){
+      error["email"] = this.errorService.required;
+    }else if(!this.validatorService.max(data["email"], 40)){
+      error["email"] = this.errorService.max(40);
     }
-    else if (!this.validatorService.email(data['username'])) {
-      error['username'] = this.errorService.email;
+    else if (!this.validatorService.email(data['email'])) {
+      error['email'] = this.errorService.email;
     }
 
     if(!this.validatorService.required(data["password"])){
@@ -60,9 +60,9 @@ export class FacadeService {
 
   // Funciones básicas
   //Iniciar sesión
-  login(username:String, password:String): Observable<any> {
+  login(email:String, password:String): Observable<any> {
     var data={
-      username: username,
+      email: email,
       password: password
     }
     return this.http.post<any>(`${environment.url_api}/api/login/`,data);
