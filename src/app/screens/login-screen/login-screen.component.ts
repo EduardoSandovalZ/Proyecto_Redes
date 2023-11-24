@@ -43,7 +43,7 @@ export class LoginScreenComponent implements OnInit {
             alert("No se pudo iniciar sesión");
         }
     );
-}
+  }
 
 
   public registrar(){
