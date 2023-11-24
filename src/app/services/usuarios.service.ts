@@ -94,8 +94,8 @@ export class UsuariosService {
   public realizarTransferencia(data: any): Observable<any> {
     return this.http.post<any>(`${environment.url_api}/api/transactions/`, data, httpOptions);
   }
-  public crearCuentaBanco(uid: string): Observable<any> {
-    return this.http.post<any>(`${environment.url_api}/api/bankAccount`, { uid }, httpOptions);
+  public crearCuentaBanco(userId: string): Observable<any> {
+    return this.http.post<any>(`${environment.url_api}/api/bankAccount`, { userId }, httpOptions);
   }
   
   
