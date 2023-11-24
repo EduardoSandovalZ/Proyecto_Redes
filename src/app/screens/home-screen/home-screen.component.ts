@@ -112,7 +112,7 @@ export class HomeScreenComponent implements OnInit, AfterViewInit {
           // Agregar datos del nombre e email
           this.lista_usuarios.forEach(usuario => {
             usuario.name = usuario.user.name;
-            usuario.last_name = usuario.user.last_name;
+            usuario.lastname = usuario.user.name;
             usuario.email = usuario.user.email;
           });
           console.log("Otro user: ", this.lista_usuarios);
@@ -176,7 +176,7 @@ export class HomeScreenComponent implements OnInit, AfterViewInit {
 export interface DatosUsuario {
   id: number,
   name: string;
-  last_name: string;
+  lastname: string;
   email: string;
   phone: string,
   role: string

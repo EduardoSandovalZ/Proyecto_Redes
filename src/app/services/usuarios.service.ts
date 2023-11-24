@@ -26,7 +26,7 @@ export class UsuariosService {
   public esquemaUser(){
     return {
       'name': '',
-      'last_name': '',
+      'lastname': '',
       'email': '',
       'password': '',
       'confirmar_password': '',
@@ -44,8 +44,8 @@ export class UsuariosService {
       error["name"] = this.errorService.required;
     }
 
-    if(!this.validatorService.required(data["last_name"])){
-      error["last_name"] = this.errorService.required;
+    if(!this.validatorService.required(data["lastname"])){
+      error["lastname"] = this.errorService.required;
     }
 
     if(!this.validatorService.required(data["email"])){

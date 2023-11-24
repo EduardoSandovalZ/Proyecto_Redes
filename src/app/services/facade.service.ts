@@ -104,7 +104,7 @@ export class FacadeService {
     this.cookieService.set(user_id_cookie_name, user_data.id, undefined, undefined, undefined, secure, secure?"None":"Lax");
     this.cookieService.set(user_email_cookie_name, user_data.email, undefined, undefined, undefined, secure, secure?"None":"Lax");
     this.cookieService.set(session_cookie_name, user_data.token, undefined, undefined, undefined, secure, secure?"None":"Lax");
-    this.cookieService.set(user_complete_name_cookie_name, user_data.name + " " + user_data.last_name, undefined, undefined, undefined, secure, secure?"None":"Lax");
+    this.cookieService.set(user_complete_name_cookie_name, user_data.name + " " + user_data.lastname, undefined, undefined, undefined, secure, secure?"None":"Lax");
     this.cookieService.set(group_name_cookie_name, user_data.roles, undefined, undefined, undefined, secure, secure?"None":"Lax");
   }
 
