@@ -105,7 +105,6 @@ export class UsuariosService {
     return this.http.post<any>(`${environment.url_api}/api/bankAccount/${userId}`, { userId }, {headers});
   }
   public obtenerCuentasUsuario(userId: string): Observable<any> {
-    console.log('jala puta2')
     const token = this.facadeService.getSessionToken();
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'x-token': token });
     let jalaputa2 = this.http.get<DatosCuenta[]>(`${environment.url_api}/api/bankAccount/${userId}`, { headers });

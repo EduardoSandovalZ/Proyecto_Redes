@@ -15,9 +15,7 @@ const routes: Routes = [
   { path: 'home-materia-screen', component: HomeMateriaScreenComponent, pathMatch: 'full'  },
   { path: 'registro-materia', component: RegistroMateriaScreenComponent, pathMatch: 'full'  },
   { path: 'transferir', component: TransferirScreenComponent, pathMatch: 'full'  },
-  { path: 'registro-materia/:id', component: RegistroMateriaScreenComponent, pathMatch: 'full'  },
-
-  
+  { path: 'registro-materia/:id', component: RegistroMateriaScreenComponent, pathMatch: 'full'  },  
 ];
 
 @NgModule({

@@ -35,6 +35,7 @@ export class TransferirScreenComponent {
     if (!this.accountId || !this.targetAccountId || this.ammount <= 0) {
       // Puedes mostrar un mensaje de error o tomar la acción adecuada
       console.error('Por favor, completa todos los campos obligatorios.');
+      alert('Por favor, completa todos los campos obligatorios.');
       return;
     }
 
