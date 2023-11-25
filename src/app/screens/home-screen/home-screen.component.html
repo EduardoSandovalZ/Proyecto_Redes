@@ -2,10 +2,7 @@
     <div class="wrapper">
         <div class="section-home">
             <div class="header-home">
-                <button class="logout-hide" mat-flat-button>Cerrar sesión</button>
-                <!-- <mat-icon class="icon-back" (click)="logout()">arrow_back</mat-icon> -->
-                <span class="title">Lista de usuarios</span>
-                <button class="logout" mat-flat-button color="warn" (click)="logout()">Cerrar sesión</button>
+                <span class="title">Lista de Cuentas</span>
             </div>
             <div class="body-home">
                 <div class="mat-elevation-z8">
@@ -30,12 +27,14 @@
                                    aria-label="Select page of periodic elements">
                     </mat-paginator>
                 </div>
-                <button class="btn btn-primary" (click)="crearCuentaBanco()">Crear Cuenta de Banco</button>
+                
+
+                
                 <br><br>
             </div>
             <div class="section-buttons">
                 <button class="btn btn-primary" (click)="realizarTransferencia()">Realizar Transferencia</button>
-                <!-- <button class="btn btn-primary" (click)="retirarDinero()">Detirar Dinero</button> -->
+                <button class="btn btn-primary" (click)="crearCuentaBanco()">Crear Cuenta de Banco</button>
             </div>
         </div>
     </div>
