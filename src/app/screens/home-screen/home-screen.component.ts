@@ -83,10 +83,13 @@ export class HomeScreenComponent implements OnInit, AfterViewInit {
         (response) => {
           // Maneja la respuesta del servidor, puedes mostrar un mensaje de éxito u otra acción necesaria
           console.log('Cuenta de banco creada exitosamente:', response);
+          alert("Cuenta de banco creada exitosamente");
+          this.router.navigate(["/"]);
         },
         (error) => {
           // Maneja los errores, puedes mostrar un mensaje de error o tomar la acción adecuada
           console.error('Error al crear la cuenta de banco:', error);
+          alert("Error al crear la cuenta de banco");
         }
       );
     } else {
