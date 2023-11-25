@@ -50,10 +50,14 @@ export class TransferirScreenComponent {
       (response) => {
         // Procesa la respuesta del servidor, puedes mostrar un mensaje de éxito u otra acción necesaria
         console.log('Transferencia exitosa:', response);
+        alert("Transferencia exitosa");
+        this.router.navigate(["/home"]);
       },
       (error) => {
         // Maneja los errores, puedes mostrar un mensaje de error o tomar la acción adecuada
         console.error('Error al realizar la transferencia:', error);
+        alert("Error al realizar la transferencia");
+        this.router.navigate(["/home"]);
       }
     );
   }
